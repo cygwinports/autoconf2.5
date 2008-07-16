@@ -1,0 +1,29 @@
+ORIG_PN="autoconf"
+
+DESCRIPTION="An extensible package of m4 macros that produce shell scripts to automatically configure software source code packages."
+HOMEPAGE="http://www.gnu.org/software/autoconf/"
+SRC_URI="http://ftp.gnu.org/gnu/autoconf/${ORIG_PN}-${PV}.tar.lzma"
+PATCH_URI="
+	mirror://portage/sys-devel/${ORIG_PN}/files/${ORIG_PN}-${PV}-revert-AC_C_BIGENDIAN.patch
+	mirror://portage/sys-devel/${ORIG_PN}/files/${ORIG_PN}-${PV}-at-keywords.patch
+	mirror://portage/sys-devel/${ORIG_PN}/files/${ORIG_PN}-${PV}-fix-multiline-string.patch
+"
+SRC_DIR="${ORIG_PN}-${PV}"
+
+src_compile() {
+	cd ${B}
+	# emacs is often broken after rebaseall, so don't depend on it
+	export EMACS=no
+	# This package is not autotoolized, so skip cygautoreconf
+	cygconf	--program-suffix=-${PV}
+	cygmake -j1
+}
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	mv ${D}/usr/share/info/autoconf{,-${PV}}.info
+
+	dodoc ${S}/ChangeLog.*
+}
