@@ -1,6 +1,6 @@
 NAME="autoconf2.5"
 VERSION=2.69
-RELEASE=1
+RELEASE=2
 CATEGORY="Devel"
 SUMMARY="Current version of the automatic configure script builder"
 DESCRIPTION="Autoconf is an extensible package of m4 macros that produce shell
@@ -11,8 +11,11 @@ template file that lists the operating system features that the package can use,
 in the form of m4 macro calls."
 REQUIRES="m4"
 HOMEPAGE="http://www.gnu.org/software/autoconf/"
-SRC_URI="mirror://gnu/autoconf/autoconf-${PV}.tar.xz"
-SRC_DIR="autoconf-${PV}"
+SRC_URI="mirror://gnu/autoconf/autoconf-${VERSION}.tar.xz"
+SRC_URI+=" config.site"
+SRC_DIR="autoconf-${VERSION}"
+
+ARCH=noarch
 
 src_compile() {
 	cd ${B}
@@ -26,4 +29,7 @@ src_install() {
 	cyginstall
 	# conflicts with binutils, gdb
 	rm -f ${D}/usr/share/info/standard.info*
+
+	insinto /usr/share
+	doins ${S}/config.site
 }
