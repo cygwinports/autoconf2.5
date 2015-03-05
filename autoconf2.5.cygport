@@ -1,6 +1,6 @@
 NAME="autoconf2.5"
 VERSION=2.69
-RELEASE=2
+RELEASE=3
 CATEGORY="Devel"
 SUMMARY="Current version of the automatic configure script builder"
 DESCRIPTION="Autoconf is an extensible package of m4 macros that produce shell

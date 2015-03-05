@@ -12,7 +12,7 @@ fi
 if test "$prefix" = /usr \
    || { test "$prefix" = NONE && test "$ac_default_prefix" = /usr ; }
 then
-    test "$sysconfdir" = '${prefix}/etc' && sysconfdir=/etc
-    test "$sharedstatedir" = '${prefix}/com' && sharedstatedir=/var
-    test "$localstatedir" = '${prefix}/var' && localstatedir=/var
+    test "$sysconfdir" = '${prefix}/etc' && sysconfdir=/etc || :
+    test "$sharedstatedir" = '${prefix}/com' && sharedstatedir=/var || :
+    test "$localstatedir" = '${prefix}/var' && localstatedir=/var || :
 fi
